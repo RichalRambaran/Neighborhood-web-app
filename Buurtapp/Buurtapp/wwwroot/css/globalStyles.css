@@ -1,0 +1,295 @@
+/*Full website*/
+* {
+    font-family: 'Lato', sans-serif;
+}
+
+*, input:focus, button {
+    outline: none !important;
+}
+
+*::-webkit-scrollbar
+{
+    width: 5px;
+    background-color: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #005E62;
+}
+
+.fa, .far, .fas {
+    font-family: "Font Awesome 5 Free" !important;
+}
+
+/*Standard values*/
+hr {
+    border-top: 1px solid white !important;
+}
+
+.primary-bg {
+    background-color: #007D82 !important;
+    color: white !important;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: white !important;
+}
+
+.border-none {
+    border: none;
+}
+
+.btn-primary {
+    background-color: #005E62 !important;
+    border: none !important;
+}
+
+.btn-secondary {
+    background-color: #1246B1 !important;
+    border: none !important;
+}
+
+.btn-primary:hover, .btn-primary:active {
+    background-color: #007D82 !important;
+}
+
+.background-height {
+    min-height: 73.5vh;
+    height: calc(100% + 100px);
+}
+
+.input-underline, .input-underline:focus {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid white;
+    color: white;
+    border-radius: 0px;
+    padding-left: 5px !important;
+    outline: none;
+}
+
+.input-underline::placeholder {
+    color: black;
+}
+
+.modal-textarea {
+    resize: none;
+}
+
+/*.input-underline::placeholder {
+    color: black;
+    opacity: 1;*/ /* Firefox */
+/*}
+
+:-ms-input-placeholder {*/ /* Internet Explorer 10-11 */
+   /*color: black;
+}
+
+::-ms-input-placeholder {*/ /* Microsoft Edge */
+    /*color: black;
+}*/
+
+.form-control:focus {
+    border-color: inherit;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.input-lable {
+    margin-bottom: 0px;
+    padding-left: 5px;
+
+}
+
+.btn-bottom-left {
+    bottom: 15px;
+    position: absolute;
+    right: 20px
+}
+
+.likes-comments-bottom {
+    bottom: 10px;
+    position: absolute
+}
+.context {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+/*header*/
+.login-btn {
+    background-color: transparent !important;
+    border: 3px solid #44EBCE !important;
+}
+
+.banner {
+    position: relative;
+    height: 25rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.banner::before {
+    content: "";
+    background-image: url("../img/neighbourhood.png");
+    background-size: cover;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    opacity: 0.85;
+    background-repeat: no-repeat;
+}
+
+.header-text {
+    width: 30rem;
+}
+
+.feature-cards {
+    height: 8rem;
+}
+
+.text-gradient {
+    color: #007D82;
+}
+
+/*Login*/
+.post-card-body {
+    height: 15rem;
+}
+
+.post-card-image {
+    max-height: 10rem;
+    width: auto;
+    position: absolute;
+    right: 15px;
+}
+
+.post-card-text {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-height: 7.5rem;
+}
+
+.post-card-btn {
+    background-color: transparent;
+    color: white;
+    border: none;
+    font-size: xx-large;
+    margin-left: 10px;
+}
+
+.post-details-btn {
+    height: 2rem;
+    background-color: transparent;
+    border: 2px solid #44EBCE !important;
+    color: black;
+}
+
+.post-details-btn:hover {
+    background-color: #44EBCE;
+}
+
+.card-action-icon {
+    font-size: x-large;
+    cursor: default !important;
+}
+
+/*Register*/
+#register-btn:hover {
+    cursor: not-allowed;
+    background-color: #007D82;
+}
+/*Login*/
+/*#loginBtn:hover {
+    cursor: not-allowed;
+    background-color: #007D82;
+}*/
+
+
+.hyperlink {
+    text-decoration: underline;
+    text-decoration-color: white;
+}
+
+/*Contact*/
+
+
+/*dashboard*/
+.post-button {
+    background-color: white !important;
+    color: black !important;
+    padding: 0.25rem 1rem;
+}
+
+.post-button:hover, .post-button:active {
+    background-color: #005E62 !important;
+    color: white !important;
+}
+
+.input-icons i {
+    position: absolute;
+    right: 15px;
+}
+
+.input-icons {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.icon {
+    padding: 7px;
+    min-width: 40px;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+}
+
+.fs-larger {
+    font-size: x-large;
+}
+
+.verberg {
+    display: none;
+}
+
+.toon {
+    display: inline;
+}
+
+.liked {
+    color: red;
+}
+
+/* Post Details */
+.details-image {
+    width: auto;
+    max-height: 15rem;
+}
+
+.comments-container {
+    height: 10rem;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.comments-container::-webkit-scrollbar-thumb {
+    background-color: white !important;
+}
+
+.comment {
+    background-color: #005E62;
+    /*color: black !important;*/
+}
+
+.black-text {
+    color: black;
+}

@@ -1,0 +1,133 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Buurtapp.Areas.Identity.Data
+
+@inject UserManager<AppUser> userManager
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Buurtapp</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/globalStyles.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/d41cb3a8c2.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+    <!-- recaptcha api-->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light box-shadow primary-bg fixed-top">
+            <div class="container">
+                <a class="navbar-brand text-white" asp-controller="Home" asp-action="Index">Safe neighbour</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarToggler">
+                    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Post" asp-action="Index">Dashboard</a>
+                        </li>
+                        @if (await userManager.GetUserAsync(User) != null && await userManager.IsInRoleAsync(await userManager.GetUserAsync(User), "Moderator"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Report" asp-action="Index">Reports</a>
+                            </li>
+                        }
+                        <li class="nav-item">
+                            <partial name="_LoginPartial" />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <main role="main">
+        @RenderBody()
+
+        <footer class="border-top footer primary-bg">
+            <div class="container">
+                <div class="row mt-3 text-white">
+                    <div class="col-lg-6 col-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <h4>Logo</h4>
+                            </div>
+                            <div class="col-1">
+                                <i class="fas fa-map-marker-alt mt-3"></i>
+                            </div>
+                            <div class="col-11">
+                                <p>
+                                    Johannes Westerdijkplein 75 <br>
+                                    2521 EN, Den Haag
+                                </p>
+                            </div>
+                            <div class="col-1">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="col-11">
+                                <p>19005830@student.hhs.nl</p>
+                            </div>
+                            <div class="col-1">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="col-11">
+                                <p>+31646165202</p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <div class="row">
+                            <div class="col-12 mt-3 mt-lg-0">
+                                <h4>Links</h4>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <p>Algemene voorwaarden</p>
+                            </div>
+                            <div class="col-12 mt-2">
+                                <p>Privacy beleid</p>
+                            </div>
+                            <div class="col-12 mt-1">
+                                <p>Contact</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- recaptcha verificatie -->
+    <script>
+        function recaptcha_verificatie() {
+            var registerButton = document.querySelector('#register-btn');
+            registerButton.removeAttribute('disabled')
+            registerButton.style.cursor = 'pointer';
+        }
+
+    </script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

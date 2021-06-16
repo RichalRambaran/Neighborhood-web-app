@@ -1,0 +1,19 @@
+﻿@page
+@model ConfirmEmailChangeModel
+@{
+    ViewData["Title"] = "Confirm email change";
+}
+
+<div class="background-height primary-bg">
+    <div class="container mt-5">
+        <div class="row mt-5">
+            <div class="12">
+                <h1>@ViewData["Title"]</h1>
+                <p>
+                    Email is geconfirmed. Klik hier om <a asp-area="Identity" asp-page="/Account/Manage/Index">Home</a> te gaan.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<partial name="_StatusMessage" model="Model.StatusMessage" />

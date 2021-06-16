@@ -1,0 +1,29 @@
+﻿@model List<Post>
+@{
+    ViewData["Title"] = "Liked Posts";
+}
+<div class="container mt-5 pt-5">
+    <div class="row mt-5">
+        @foreach (Post post in Model)
+        {
+            <div class="col-lg-6 col-12 mb-5">
+                <div class="card border-none mb-lg-0">
+                    <div class="card-body post-card-body gradient-bg">
+                        <div class="row">
+                            <div class="col-6">
+                                <h4 class="card-title">@post.Title</h4>
+                                <p class="card-text post-card-text">@post.Content</p>
+                            </div>
+                            <div class="col-6">
+                                <img class="card-img-top post-card-image" src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Card image cap">
+                            </div>
+                            <button class="post-card-btn"><i class="fas fa-heart"></i></button>
+                            <button class="post-card-btn"><i class="fas fa-comment"></i></button>
+                            <button class="post-details-btn mt-2 ml-auto mr-3">Bekijk</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

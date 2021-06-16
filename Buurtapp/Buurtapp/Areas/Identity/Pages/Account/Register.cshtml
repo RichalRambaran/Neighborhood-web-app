@@ -1,0 +1,85 @@
+﻿@page
+@model RegisterModel
+
+<div class="background-height primary-bg">
+    <div class="container mt-5">
+        <div class="row mt-5">
+            <div class="col-lg-4 col-12 d-none d-lg-block">
+                <!--left side-->
+                <div class="card w-100 mt-5 border-bottom-0 border-left-0 border-top-0 border-white bg-transparent rounded-0 pr-3">
+                    <img class="card-img-top" src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <h1 class="card-title text-center">Lorem ipsum</h1>
+                        <p class="card-text text-center">Dolor sit amet, conseteur sadipiscing elitr, sed diam</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-8 col-12 my-auto">
+                <!--right side-->
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <h1 class="text-lg-left text-center">Registreren</h1>
+                    </div>
+                    <div class="col-12">
+                        <p class="text-lg-left text-center">
+                            Vul hier je gegevens in om je account aan te maken.<br>
+                            Al gebruiker? <b><a class="hyperlink text-white" asp-area="Identity" asp-page="/Account/Login" alt="Al gebruiker?">Klik hier!</a></b>
+                        </p>
+                    </div>
+                    <div class="col-12">
+                        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                            <div class="form-group row">
+                                <div class="col-lg-6 col-12">
+                                    <label asp-for="Input.FirstName" class="input-lable">Voornaam</label>
+                                    <input asp-for="Input.FirstName" type="text" class="form-control input-underline" placeholder="Voornaam">
+                                </div>
+                                <div class="col-lg-6 col-12">
+                                    <label asp-for="Input.LastName" class="input-lable">Achternaam</label>
+                                    <input asp-for="Input.LastName" type="text" class="form-control input-underline" placeholder="Achternaam">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-12">
+                                    <label asp-for="Input.Email" class="input-lable"></label>
+                                    <input asp-for="Input.Email" class="form-control input-underline" placeholder="Email" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-12">
+                                    <label asp-for="Input.Password" class="input-lable">Wachtwoord</label>
+                                    <input asp-for="Input.Password" class="form-control input-underline" placeholder="Wachtwoord" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-12">
+                                    <label asp-for="Input.ConfirmPassword" class="input-lable">Herhaal Wachtwoord</label>
+                                    <input asp-for="Input.ConfirmPassword" class="form-control input-underline" placeholder="Herhaal Wachtwoord" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-6 col-12">
+                                    <label asp-for="Input.PostalCode" class="input-lable">Postcode</label>
+                                    <input asp-for="Input.PostalCode" type="text" class="form-control input-underline" placeholder="Postcode">
+                                </div>
+                                <div class="col-lg-6 col-12">
+                                    <label asp-for="Input.HouseNumber" class="input-lable">Huisnummer</label>
+                                    <input asp-for="Input.HouseNumber" type="text" class="form-control input-underline" placeholder="Huisnummer">
+                                </div>
+                            </div>
+                            <!-- recaptcha widget-->
+                            <div class="g-recaptcha mb-3" data-sitekey="6Lc-9gsaAAAAAN8kVgxr7yeuPZIVQSX6W6O6kKgE"
+                                 data-callback = recaptcha_verificatie></div>
+
+                            <button id="register-btn" type="submit" class="btn btn-primary mb-5" disabled>Register</button>
+                        </form>
+                        @section Scripts {
+                            <partial name="_ValidationScriptsPartial" />
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

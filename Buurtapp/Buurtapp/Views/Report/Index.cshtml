@@ -1,0 +1,49 @@
+@model IEnumerable<Buurtapp.Models.ReportedPost>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="background-height primary-bg">
+    <div class="container mt-5 pt-5">
+        <h1>Gerapporteerde meldingen</h1>
+
+        <table class="table text-white">
+            <thead>
+                <tr>
+                    <th>
+                      <p>Melding titel</p>
+                    </th>
+                    <th>
+                       <p>Rapporteerder</p>
+                    </th>
+                    <th>
+                       <p>Beschrijving</p>
+                    </th>
+                    <th>
+                        <p>Actions</p>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Post.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AppUser.Fullname)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            <a asp-controller="Post" asp-action="Details" asp-route-id="@item.PostId" class="btn btn-primary">Bekijk</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

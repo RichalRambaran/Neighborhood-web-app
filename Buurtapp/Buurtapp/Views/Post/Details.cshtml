@@ -1,0 +1,218 @@
+@using Buurtapp.Data;
+
+@model Buurtapp.ViewModels.DetailsViewModel;
+
+@{ ViewData["Title"] = "Details"; }
+
+@inject UserContext context;
+
+<div class="background-height primary-bg">
+    <div class="container mt-5 pt-5">
+        <div class="row">
+            <div class="col-lg-5 col-12">
+                <div class="row">
+                    <div class="col-12">
+                        <h1 class="text-lg-left">Melding: @Model.Post.Title</h1>
+                    </div>
+                    <div class="col-6">
+                        <p>Poster:</p>
+                    </div>
+                    @if (@Model.Post.Anonymous == false)
+                    {
+                        <div class="col-6">
+                            <p>@Model.Post.AppUser.Fullname</p>
+                        </div> }
+                    else
+                    {
+                        <div class="col-6">
+                            <p>Anonieme poster</p>
+                        </div>}
+                    <div class="col-6">
+                        <p>Datum gepost:</p>
+                    </div>
+                    <div class="col-6">
+                        <p>@Model.Post.PlaceDate</p>
+                    </div>
+                    <div class="col-6">
+                        <p>Categorie:</p>
+                    </div>
+                    <div class="col-6">
+                        <p>@Model.Post.Category.Name</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <p>Aantal views:</p>
+                    </div>
+                    <div class="col-6">
+                        <p>@Model.Post.Views</p>
+                    </div>
+                    <div class="col-6">
+                        <p>Aantal likes:</p>
+                    </div>
+                    <div class="col-6">
+                        <p>@Model.Post.AantalLikes</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <p>Gearchiveerd:</p>
+                    </div>
+                    <div class="col-6">
+                        @if (@Model.Post.Archived == true)
+                        {
+                            <p>Ja</p> }
+                        else
+                        {
+                            <p>Nee</p>}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <p>Foto's:</p>
+                    </div>
+                    @if (@Model.Post.Image == null)
+                    {
+                        <div class="col-6">
+                            <p>Geen foto's geupload</p>
+                        </div> }
+                    else
+                    {
+                        <div class="col-12 mb-3">
+                            <img class="details-image" src="~/img/uploadedimg/@Model.Post.Image" alt="@Model.Post.Image">
+                        </div>}
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        @if (ViewData["LoggedinUser"] == @Model.Post.AppUser.Id)
+                        {
+                            <div>
+                                <a class="text-white btn btn-primary mb-3" asp-action="Edit" asp-route-id="@Model.Post.PostId">Wijzig melding</a>
+                                <a class="text-white btn btn-danger mb-3" asp-action="Delete" asp-route-id="@Model.Post.PostId">Verwijder melding</a>
+                            </div>
+                        }
+                    </div>
+                    <div class="col-12">
+                        @if (ViewData["LoggedinUser"] != @Model.Post.AppUser.Id)
+                        {
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                            Rapporteer
+                        </button>
+                        }
+
+                    </div>
+                <div>
+                </div>
+            </div>
+        </div>
+            <div class="col-lg-6 col-12 offset-lg-1 offset-0">
+                        <div class="row">
+                            <div class="col-12">
+                                <h1>Beschrijving:</h1>
+                                @Model.Post.Content
+                            </div>
+                        </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-5 col-12">
+                <h1>Comments</h1>
+                @if (@Model.Comments.Count() != 0)
+                    {
+                        <div class="comments-container">
+                            @foreach (Comment comment in Model.Comments)
+                            {
+                                <div class="comment p-2 mb-3">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <p>@context.Users.Single(p => p.Id == comment.UserId).Fullname</p>
+                                        </div>
+                                        <div class="col-6">
+                                            <p>@comment.PlaceDate</p>
+                                        </div>
+                                        <div class="col-12">
+                                            <p>@comment.Content</p>
+                                        </div>
+                                        @if (ViewData["LoggedinUser"] == @Model.Post.AppUser.Id)
+                                        {
+                                            <div class="col-12">
+                                                 <a asp-controller="Comment" asp-action="Delete" asp-route-id="@comment.CommentId"><i class="fas fa-trash text-white"></i></a>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                <div class="commentDiv mt-2">
+                    <textarea rows="3" class="commentTextArea w-100 input-underline" id="commentContent" placeholder="Voeg commentaar toe" name="comment"></textarea>
+                    <a id="sendComment" onclick="sendComment(@Model.Post.PostId)" class="commentButton btn btn-primary" type="button">Voeg toe</a>
+                </div>
+            </div>
+            <div class="col-lg-6 col-12 offset-lg-1 offset-0">
+                <h1>Oplossingen</h1>
+                @if (@Model.Solutions.Count() != 0)
+                {
+                    <div class="comments-container">
+                    @foreach (Solution solution in Model.Solutions)
+                    {
+                        <div class="comment p-2 mb-3">
+                            <div class="row">
+                                <div class="col-6">
+                                    <p>@context.Users.Single(p => p.Id == solution.UserId).Fullname</p>
+                                </div>
+                                <div class="col-6">
+                                    <p>@solution.PlaceDate</p>
+                                </div>
+                                <div class="col-12">
+                                    <p>@solution.Title</p>
+                                </div>
+                                <div class="col-12">
+                                    <p>@solution.Description</p>
+                                </div>
+                                @if (ViewData["LoggedinUser"] == @Model.Post.AppUser.Id)
+                                {
+                                    <div class="col-12">
+                                        <a asp-controller="Solution" asp-action="Delete" asp-route-id="@solution.SolutionId"><i class="fas fa-trash text-white"></i></a>
+                                    </div>
+                                }
+@*                                    @if (await userManager.GetUserAsync(User) != null && await userManager.IsInRoleAsync(await userManager.GetUserAsync(User), "Moderator")) *@
+@*                                    { *@
+@*                                    } *@
+                            </div>
+                        </div>
+                    }
+                </div>
+                }
+                <div class="titleDiv mt-2">
+                    <input placeholder="Vul titel in" type="text" name="title" id="solutionTitle" class="comment-style input-underline w-100">
+                </div>
+                <div class="descriptionDiv">
+                    <textarea class="solutionTextArea w-100 input-underline" id="solutionDescription" placeholder="Voeg descriptie toe" name="solution"></textarea>
+                </div>
+                <a id="sendSolution" onclick="sendSolution(@Model.Post.PostId)" class="solutionbutton btn btn-primary mb-3" type="button">Voeg toe</a>
+            </div>
+        </div>
+    </div>
+
+    <!--hidden modal-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title black-text" id="exampleModalLabel">Rapporteren</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <textarea rows="6" id="reportPostDescription" placeholder="Voeg descriptie toe" class="input_underline w-100 modal-textarea"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluit</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="reportPost(@Model.Post.PostId)">Verstuur</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
